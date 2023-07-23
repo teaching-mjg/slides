@@ -14,3 +14,8 @@ ggplot(data_foraging, aes(y=n_hi_consumed, x=trialCount))+
   theme_bw() + theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank())
 
   
+ggplot(data_foraging, aes(y=n_hi_consumed, x=trialCount, colour=fruits))+
+  stat_summary(geom='point',position=position_dodge(width=0.2))+
+  stat_summary(geom='line',position=position_dodge(width=0.2))+
+  facet_wrap(~instructions)+
+  theme_bw()
