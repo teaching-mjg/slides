@@ -1,0 +1,434 @@
+---
+title: "R for data visualisation"
+author: "Matt Green"
+format:
+  revealjs:
+    slide-number: true
+    show-slide-number: all
+    scrollable: true
+    preview-link: auto
+    fig-width: 7
+    fig-height: 4
+    toc: false
+    toc-depth: 2
+    number-sections: true
+    chalkboard: true
+execute: 
+  echo: true
+---
+
+## Anscombe's Quartet
+
+`Don't jump straight to summary statistics'
+
+The following datasets all have the same mean, and the same correlation coefficient, and the correlations are equally significant (have the same $p$ value).
+
+---
+
+These datasets are all the same, right?
+
+![](img/plot1.png)
+
+---
+
+No ...
+
+![](img/plot2.png)
+
+---
+
+**LOESS** **L**ocally **E**stimated **S**catterplot **S**moothing 
+
+![](img/plot3.png)
+
+---
+
+**LOESS** with points 
+
+![](img/plot4.png)
+
+---
+
+## `ggplot()` gallery
+
+Visit
+[https://r-graph-gallery.com/](https://r-graph-gallery.com/)
+
+Browse graphs to choose one you like
+
+---
+
+Distribution
+
+![](img/Screenshot from 2023-07-21 05-10-11.png)
+
+---
+
+Correlation
+
+![](img/Screenshot from 2023-07-21 05-08-19.png)
+
+---
+
+Evolution
+
+![](img/Screenshot from 2023-07-21 05-09-58.png)
+
+
+## data-to-viz flowchart
+
+Start by saying what kind of data you have, and use the flowchart to choose a plot that suits the type of data you have
+
+Visit
+[https://www.data-to-viz.com/](https://www.data-to-viz.com/)
+
+---
+
+![](img/Screenshot from 2023-07-21 05-26-02.png)
+
+## Build a plot in layers
+
+```{r}
+library(dataviz)
+library(ggplot2)
+library(knitr)
+library(magrittr)
+```
+
+```{r}
+data_ala
+```
+
+---
+
+Notice that this establishes the axes but doesn't show any data
+
+```{r}
+ggplot(data_ala, aes(y=RT, x=Valence))
+```
+
+---
+
+Ask for a boxplot by adding a layer
+
+```{r}
+ggplot(data_ala, aes(y=RT, x=Valence)) +
+  geom_boxplot()
+```
+
+---
+
+Ask for a violin plot instead by changing the `geom`
+
+
+```{r}
+ggplot(data_ala, aes(y=RT, x=Valence)) +
+  geom_violin()
+```
+
+---
+
+Sometimes it's easier to compare things in the other orientation. Add a layer that asks for the coordinates to be flipped.
+
+```{r}
+ggplot(data_ala, aes(y=RT, x=Valence)) +
+  geom_violin() +
+  coord_flip()
+```
+
+---
+
+There's usually more than one way to achieve the same thing. Here we swap x and y instead of saying `coord_flip`
+
+```{r}
+ggplot(data_ala, aes(y=Valence, x=RT)) +
+  geom_violin() 
+```
+
+---
+
+Violins represent the same data twice. Compare with a density plot. Violins are doubled-up density plots.
+
+```{r}
+ggplot(data_ala, aes(x=RT)) +
+  geom_density() +
+  facet_wrap(~Valence, nrow=3)
+```
+
+---
+
+Colour helps
+
+```{r}
+ggplot(data_ala, aes(x=RT, fill=Valence)) +
+  geom_density() +
+  facet_wrap(~Valence, nrow=3)
+```
+
+---
+
+Some distributions are easier to tell apart when overlaid
+
+```{r}
+ggplot(data_ala, aes(x=RT, fill=Valence)) +
+  geom_density()
+```
+
+---
+
+See-through is controlled by `alpha`
+
+```{r}
+ggplot(data_ala, aes(x=RT, fill=Valence)) +
+  geom_density(alpha=0.5)
+```
+
+---
+
+Ask for a different colour palette
+
+```{r}
+ggplot(data_ala, aes(x=RT, fill=Valence)) +
+  geom_density(alpha=0.5)+
+  scale_fill_brewer(palette = "Set1")
+```
+
+---
+
+There are lots of palettes
+
+```{r}
+ggplot(data_ala, aes(x=RT, fill=Valence)) +
+  geom_density(alpha=0.5)+
+  scale_fill_hue()
+```
+
+---
+
+Fine control is possible
+
+```{r}
+ggplot(data_ala, aes(x=RT, fill=Valence)) +
+  geom_density(alpha=0.5)+
+  scale_fill_hue(l=40)
+```
+
+---
+
+But, beware _premature optimisation_
+
+* It's all too easy to get lost down a rabbit-hole in `ggplot`
+
+* R is pretty good at choosing sensible values for you 
+
+* Stick to the defaults at first
+
+* Go __broad__ before going __deep__
+
+---
+
+## Multi-factorial data
+
+- `data_ldt` from the Lexical Decision Task is provided by the `dataviz` package, so you don't have to read it in, it's already there
+- eyeball the first ten rows of any dataset by typing the name of the dataset
+
+```{r}
+data_ldt
+```
+
+--- 
+
+- you can ask for a `summary` of any dataset
+
+```{r}
+summary(data_ldt)
+```
+
+---
+
+- how many participants in each cell of the design?
+
+```{r}
+with(data_ldt, table(language, condition))
+```
+
+---
+
+- `facet`s are really good for data with more than one factor
+
+<!-- - Notice that this establishes the axes and facets but doesn't show any data.  -->
+- "monolingual" is one facet; "bilingual" is the other facet
+
+```{r}
+#| fig-width: 3
+#| fig-height: 2
+ggplot(data_ldt, aes(y=rt, x=condition))+
+  facet_wrap(~language)
+```
+
+---
+
+Quick and dirty first
+
+```{r}
+ggplot(data_ldt, aes(y=rt, x=condition))+
+  facet_wrap(~language)+
+  geom_boxplot()
+```
+
+---
+
+Add colour
+
+```{r}
+ggplot(data_ldt, aes(y=rt, x=condition, colour=condition))+
+  facet_wrap(~language)+
+  geom_boxplot()
+```
+
+---
+
+Maybe violins
+
+```{r}
+ggplot(data_ldt, aes(y=rt, x=condition, colour=condition))+
+  facet_wrap(~language)+
+  geom_violin(aes(fill=condition), alpha=0.5)
+```
+
+---
+
+I like to see the mean overlaid on violins
+
+```{r}
+ggplot(data_ldt, aes(y=rt, x=condition, colour=condition))+
+  facet_wrap(~language)+
+  geom_violin(aes(fill=condition), alpha=0.5)+
+  stat_summary(fun=mean)
+```
+
+---
+
+Adding a line joining the means can help make interactions clearer
+
+```{r}
+#| fig-width: 6
+#| fig-height: 3
+ggplot(data_ldt, aes(y=rt, x=condition, colour=condition))+
+  facet_wrap(~language)+
+  geom_violin(aes(fill=condition), alpha=0.5, show.legend = F)+
+  stat_summary(fun=mean, show.legend =FALSE)+
+  stat_summary(geom='line', fun=mean, aes(group=1), colour='black')
+```
+
+---
+
+I want to see how the distributions overlap
+
+```{r}
+ggplot(data_ldt, 
+       aes(x=rt, group=interaction(condition, language), fill=condition))+
+  facet_wrap(~language)+
+  geom_density()
+```
+
+---
+
+I want to see how the distributions overlap in the same facet
+
+- so I comment out the request for different facets using hash (#) at the start of line 4: now R ignores that line
+
+- output in next slide
+
+```{r, eval=F}
+#| fig-width: 4
+#| fig-height: 3
+
+ggplot(data_ldt, 
+       aes(x=rt, 
+           fill=interaction(condition, language)))+
+  #facet_wrap(~language)+
+  geom_density(alpha=0.5)+
+  scale_fill_discrete(name='condition')+
+  theme_bw()+theme(panel.grid = element_blank())
+```
+
+---
+
+I want to see how the distributions overlap in the same facet
+
+```{r, eval=T, echo=F}
+#| fig-width: 6
+#| fig-height: 3
+
+ggplot(data_ldt, 
+       aes(x=rt, 
+           fill=interaction(condition, language)))+
+  #facet_wrap(~language)+
+  geom_density(alpha=0.5)+
+  scale_fill_discrete(name='condition')+
+  theme_bw()+theme(panel.grid = element_blank())
+```
+
+## A tidier way of building a plot in layers (scroll down)
+
+- assignment yields no output
+
+```{r}
+myaxes = ggplot(data_ldt, aes(y=rt,  x=condition, fill=language))
+```
+
+- stating the name (myaxes) yields just the axes
+
+```{r}
+myaxes
+```
+
+- yields the violins
+
+```{r}
+myaxes + geom_violin()
+```
+
+- yields the violins and facets
+
+```{r}
+myaxes + geom_violin() + facet_wrap(~language)
+```
+
+So you can write the plot like this, which some people find much easier to write
+
+```{r}
+# the next 3 lines are all assignments so they don't produce output
+myaxes = ggplot(data_ldt, aes(y=rt,  x=condition, fill=language))
+myplot = myaxes + geom_violin()
+myplot = myplot + facet_wrap(~language)
+# the next line produces the whole plot as output
+myplot
+```
+
+
+## I want to export my plot
+
+
+- I made my plot in R - now I want to save it as a png file so I can include it in my manuscript.
+
+- First run the code that generates the plot
+
+```{r}
+#| eval: false
+# the next 3 lines are all assignments so they don't produce output
+myaxes = ggplot(data_ldt, aes(y=rt,  x=condition, fill=language))
+myplot = myaxes + geom_violin()
+myplot = myplot + facet_wrap(~language)
+# the next line produces the whole plot as output
+myplot
+```
+
+- now we can say `ggsave` which saves the most recently generated plot to file.
+
+```{r}
+#| eval: false
+ggsave(filename = "Figure1.png", width=7, height=4)
+```
+

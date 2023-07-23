@@ -1,0 +1,133 @@
+## Basic Plotting {.scrollable}
+
+
+```{r}
+library(dataviz)
+library(ggplot2)
+library(magrittr)
+library(dplyr)
+require(papaja)
+```
+
+Examine data
+
+```{r}
+data_ala
+```
+---
+  * Use the column names to specify what goes on the `y` axis and what goes on the `x` axis.
+* Use `stat_summary` to say that we don't want to plot the raw data, we want a summary statistic instead.
+* Use `geom` to say that we want a bar chart, and `fun` to say that we want the mean (as opposed to the median, say).
+
+```{r}
+#| code-line-numbers: "2"
+ggplot(data_ala, aes(y=RT, x=Valence))+
+  stat_summary(geom="bar", fun="mean")
+```
+
+We can add error bars
+
+```{r}
+ggplot(data_ala, aes(y=RT, x=Valence))+
+  stat_summary(geom="bar", fun="mean")+
+  stat_summary(geom='errorbar', width=0.3, fun.data = mean_cl_normal, fun.args=list(conf.int=.95))
+```
+
+We can use colour to distinguish the levels of Valence.
+
+```{r}
+ggplot(data_ala, aes(y=RT, x=Valence, colour=Valence, fill=Valence))+
+  stat_summary(geom="bar", fun="mean", alpha=0.5)+
+  stat_summary(geom='errorbar', width=0.3, fun.data = mean_cl_normal,
+               fun.args=list(conf.int=.95), show.legend = F)
+```
+
+Let's imagine that we had data on the age of the participants: Younger vs Older
+
+```{r}
+data_ala_age <- data_ala %>%
+  mutate(Age=ifelse(Participant %% 2, "Older", "Younger"))
+```
+
+Let's imagine that younger people were quicker to respond.
+
+```{r}
+set.seed(1)
+data_ala_age <- data_ala_age %>%
+  mutate(RT.adjustment=runif(n=nrow(data_ala_age), min=0, max=0.25)) %>%
+  mutate(RT=ifelse(Age=="Younger", RT-RT.adjustment, RT))
+```
+
+Let's separate out the two groups of Age
+
+```{r}
+ggplot(data_ala_age, aes(y=RT, x=Valence, colour=Valence, fill=Valence))+
+  stat_summary(geom="bar", fun="mean", alpha=0.5)+
+  stat_summary(geom="line", fun="mean", aes(group=1), colour="black")+
+  stat_summary(geom='errorbar', width=0.3, fun.data = mean_cl_normal,
+               fun.args=list(conf.int=.95), show.legend = F)+
+  stat_summary(geom='point', fun="mean", size=3, show.legend = F)+
+  facet_grid(~Age)
+```
+
+Let's change the theme. This one is `theme_apa()` which is supposed to be APA-compliant. It comes from a package called `papaja`
+
+```{r}
+ggplot(data_ala_age, aes(y=RT, x=Valence, colour=Valence, fill=Valence))+
+  stat_summary(geom="bar", fun="mean", alpha=0.5)+
+  stat_summary(geom="line", fun="mean", aes(group=1), colour="black")+
+  stat_summary(geom='errorbar', width=0.3, fun.data = mean_cl_normal,
+               fun.args=list(conf.int=.95), show.legend = F)+
+  stat_summary(geom='point', fun="mean", size=3, show.legend = F)+
+  facet_grid(~Age)+
+  theme_apa()
+```
+
+Let's add raw data points
+
+```{r}
+ggplot(data_ala_age, aes(y=RT, x=Valence, colour=Valence, fill=Valence))+
+  geom_jitter(width=0.2, height=0, show.legend = F)+
+  stat_summary(geom="bar", fun="mean", alpha=0.5)+
+  #stat_summary(geom="line", fun="mean", aes(group=1), colour="black")+
+  stat_summary(geom='errorbar', width=0.3, fun.data = mean_cl_normal,
+               fun.args=list(conf.int=.95), show.legend = F, lwd=1, color='grey50')+
+  #stat_summary(geom='point', fun="mean", size=3, show.legend = F)+
+  facet_grid(~Age)+
+  theme_apa()
+```
+
+There are other ways to represent the distribution of raw data points together with summary statistics.
+
+In a violin plot, the violin is widest where the distribution peaks. The code is simple.
+
+```{r}
+ggplot(data_ala_age, aes(y=RT, x=Valence, fill=Valence))+
+  geom_violin(alpha=0.5)
+```
+
+We can add raw data, among other things (like a boxplot)
+
+```{r}
+ggplot(data_ala_age, aes(y=RT, x=Valence, fill=Valence))+
+  geom_violin(alpha=0.5)+
+  geom_boxplot(width=0.25, fatten=0, show.legend = F)+
+  geom_jitter(width=0.05, height=0, alpha=0.2, show.legend = F)+
+  facet_grid(~Age)
+```
+
+
+```{r}
+#| echo: true
+#| output-location: slide
+library(ggplot2)
+ggplot(airquality, aes(Temp, Ozone)) +
+  geom_point() +
+  geom_smooth(method = "loess")
+```
+
+## Excercises
+
+1. How did we add colour? What additional code did we have to include?
+  1. What element of a `ggplot` plots separate facets?
+

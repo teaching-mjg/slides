@@ -1,0 +1,31 @@
+Papaja has some APA-related plot styles which look nice, but the syntax is different.
+
+```{r, eval=F}
+#not run because not data_ala_age
+library("papaja")
+apa_beeplot(
+  data = data_ala_age
+  , id = "Participant"
+  , dv = "RT"
+  , factors = c("Age", "Valence")
+  , args_points = list(cex = 2, bg = c("skyblue4", "indianred3", "seagreen4"), col = "white")
+  , args_swarm = list(cex = 1)
+  , args_error_bars = list(length = 0.2, col = "grey10")
+)
+
+apa_lineplot(
+  data = data_ala_age
+  , id = "Participant"
+  , dv = "RT"
+  , factors = c("Age", "Valence")
+  , args_points = list(cex = 2, bg = c("skyblue4", "indianred3", "seagreen4"), col = "white")
+  , args_error_bars = list(length = 0.02, col = "grey20")
+)
+
+apa_barplot(
+  data = data_ala_age
+  , id = "Participant"
+  , dv = "RT"
+  , factors = c("Age", "Valence")
+)
+```

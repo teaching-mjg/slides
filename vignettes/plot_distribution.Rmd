@@ -1,0 +1,45 @@
+---
+title: "Plot distributions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plot distributions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+First load libraries.
+
+```{r setup}
+library(dataviz)
+library(ggplot2)
+```
+
+Plot the distributions overlaid on each other.
+
+```{r, fig.width=7, fig.height=4}
+ggplot(data_ala, aes(x=RT, group=Valence, color=Valence, fill=Valence)) +
+    geom_density(alpha=0.5)+
+    scale_fill_manual(values=c("#F8766D", "#619CFF", "#00BA38" ))+
+    scale_color_manual(values=c("#F8766D", "#619CFF", "#00BA38" ))
+```
+
+Plot the levels of Valence in separate facets.
+
+Notice that the only difference from the code that shows the distributions overlaid on each other is the addition of one line: 
+`facet_wrap(~Valence, nrow=3)+`
+
+```{r, fig.width=7, fig.height=7}
+ggplot(data_ala, aes(x=RT, group=Valence, color=Valence, fill=Valence)) +
+    geom_density(alpha=0.5)+
+    facet_wrap(~Valence, nrow=3)+
+    scale_fill_manual(values=c("#F8766D", "#619CFF", "#00BA38" ))+
+    scale_color_manual(values=c("#F8766D", "#619CFF", "#00BA38" ))
+```
+
