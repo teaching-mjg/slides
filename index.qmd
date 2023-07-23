@@ -9,15 +9,15 @@ format:
     preview-link: auto
     fig-width: 7
     fig-height: 4
-    toc: false
-    toc-depth: 2
+    toc: true
+    toc-depth: 1
     number-sections: true
     chalkboard: true
 execute: 
   echo: true
 ---
 
-## Anscombe's Quartet
+# Anscombe's Quartet
 
 `Don't jump straight to summary statistics'
 
@@ -47,9 +47,8 @@ No ...
 
 ![](img/plot4.png)
 
----
 
-## `ggplot()` gallery
+# Gallery
 
 Visit
 [https://r-graph-gallery.com/](https://r-graph-gallery.com/)
@@ -75,7 +74,7 @@ Evolution
 ![](img/Screenshot from 2023-07-21 05-09-58.png)
 
 
-## data-to-viz flowchart
+# Flowchart
 
 Start by saying what kind of data you have, and use the flowchart to choose a plot that suits the type of data you have
 
@@ -86,7 +85,7 @@ Visit
 
 ![](img/Screenshot from 2023-07-21 05-26-02.png)
 
-## Build a plot in layers
+# Build a plot in layers
 
 ```{r}
 library(dataviz)
@@ -225,11 +224,58 @@ But, beware _premature optimisation_
 
 * Go __broad__ before going __deep__
 
+# A tidier way of building a plot in layers
+
+- assignment yields no output
+
+```{r}
+myaxes = ggplot(data_ala, aes(y=RT,  x=Valence, color=Valence))
+```
+
 ---
 
-## Multi-factorial data
+- stating the name (myaxes) yields just the axes
+
+```{r}
+myaxes
+```
+
+---
+
+- adding a layer with + yields the violins
+
+```{r}
+myaxes + geom_violin()
+```
+
+---
+
+- adding another layer
+
+```{r}
+myaxes + geom_violin() + geom_boxplot()
+```
+
+---
+
+So you can write the plot like this, which some people find much easier to write
+
+```{r}
+# the next 3 lines are all assignments so they don't produce output
+myaxes = ggplot(data_ala, aes(y=RT,  x=Valence, color=Valence))
+myplot = myaxes + geom_violin()
+myplot = myplot + geom_boxplot()
+# the next line produces the whole plot as output
+myplot
+```
+
+
+# Multi-factorial data and facets
 
 - `data_ldt` from the Lexical Decision Task is provided by the `dataviz` package, so you don't have to read it in, it's already there
+
+---
+
 - eyeball the first ten rows of any dataset by typing the name of the dataset
 
 ```{r}
@@ -255,8 +301,6 @@ with(data_ldt, table(language, condition))
 ---
 
 - `facet`s are really good for data with more than one factor
-
-<!-- - Notice that this establishes the axes and facets but doesn't show any data.  -->
 - "monolingual" is one facet; "bilingual" is the other facet
 
 ```{r}
@@ -370,48 +414,14 @@ ggplot(data_ldt,
   theme_bw()+theme(panel.grid = element_blank())
 ```
 
-## A tidier way of building a plot in layers (scroll down)
-
-- assignment yields no output
-
-```{r}
-myaxes = ggplot(data_ldt, aes(y=rt,  x=condition, fill=language))
-```
-
-- stating the name (myaxes) yields just the axes
-
-```{r}
-myaxes
-```
-
-- yields the violins
-
-```{r}
-myaxes + geom_violin()
-```
-
-- yields the violins and facets
-
-```{r}
-myaxes + geom_violin() + facet_wrap(~language)
-```
-
-So you can write the plot like this, which some people find much easier to write
-
-```{r}
-# the next 3 lines are all assignments so they don't produce output
-myaxes = ggplot(data_ldt, aes(y=rt,  x=condition, fill=language))
-myplot = myaxes + geom_violin()
-myplot = myplot + facet_wrap(~language)
-# the next line produces the whole plot as output
-myplot
-```
 
 
-## I want to export my plot
+# I want to export my plot
 
 
 - I made my plot in R - now I want to save it as a png file so I can include it in my manuscript.
+
+---
 
 - First run the code that generates the plot
 
@@ -425,6 +435,7 @@ myplot = myplot + facet_wrap(~language)
 myplot
 ```
 
+
 - now we can say `ggsave` which saves the most recently generated plot to file.
 
 ```{r}
@@ -432,3 +443,10 @@ myplot
 ggsave(filename = "Figure1.png", width=7, height=4)
 ```
 
+## test second level header
+
+foo
+
+--- 
+
+bar
