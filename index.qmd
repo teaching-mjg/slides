@@ -426,14 +426,86 @@ summary(data_foraging)
 
 ---
 
+Quick and dirty first: slight improvement over trials before we distinguish between the conditions
+
 ```{r}
+ggplot(data_foraging, aes(y=n_hi_consumed, x=trialCount))+
+  geom_smooth()
+```
+
+---
+
+Distinguish between fixed and random fruit: performance improves more over trials for fixed fruit
+
+```{r}
+ggplot(data_foraging, aes(y=n_hi_consumed, x=trialCount, colour=fruits))+
+  geom_smooth()
+```
+
+---
+
+Distinguish between naive and informed participants: performance is better for fixed fruit when participants are informed that the trees will be in the same place across trials (this primes them to remember where the trees are)
+
+```{r}
+ggplot(data_foraging, aes(y=n_hi_consumed, x=trialCount, colour=fruits))+
+  geom_smooth()+
+  facet_wrap(~instructions)
+```
+
+---
+
+Cosmetic adjustments
+
+```{r}
+#| fig-width: 9
+#| fig-height: 4
+#| out-width: 12in
+#| out-height: 4in
 ggplot(data_foraging, aes(y=n_hi_consumed, x=trialCount, color=fruits))+
   facet_grid(~instructions)+
   geom_smooth()+
   scale_x_continuous(breaks=c(1,5,10))+
   ylab("Number of high fruit consumed")+
-  labs(title="Mean number of high value fruit consumed per trial",subtitle = "max possible is 10")+
-  theme_bw() + theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank())
+  labs(title="Mean number of high value fruit consumed per trial", 
+       subtitle = "max possible is 10")+
+  theme_bw() + 
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank())+#, aspect.ratio = 1)+
+  scale_color_manual(values = c("red", "blue"))
+```
+
+---
+
+Switch from LOESS regression to linear regression using `method='lm'`
+
+```{r}
+#| fig-width: 9
+#| fig-height: 4
+#| out-width: 12in
+#| out-height: 4in
+ggplot(data_foraging, aes(y=n_hi_consumed, x=trialCount, color=fruits))+
+  facet_grid(~instructions)+
+  geom_smooth(method='lm')+
+  scale_x_continuous(breaks=c(1,5,10))+
+  ylab("Number of high fruit consumed")+
+  labs(title="Mean number of high value fruit consumed per trial", 
+       subtitle = "max possible is 10")+
+  theme_bw() + 
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank())+#, aspect.ratio = 1)+
+  scale_color_manual(values = c("red", "blue"))
+```
+
+
+---
+
+An alternative using points and lines
+
+```{r}
+ggplot(data_foraging, aes(y=n_hi_consumed, x=trialCount, colour=fruits))+
+  stat_summary(geom='point',position=position_dodge(width=0.2))+
+  stat_summary(geom='line',position=position_dodge(width=0.2))+
+  facet_wrap(~instructions)+
+  theme_bw()
+
 ```
 
 

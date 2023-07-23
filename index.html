@@ -931,17 +931,82 @@ language      word nonword
 </section>
 <section class="slide level2">
 
+<p>Quick and dirty first: slight improvement over trials before we distinguish between the conditions</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">color=</span>fruits))<span class="sc">+</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
-<span id="cb37-5"><a href="#cb37-5"></a>  <span class="fu">ylab</span>(<span class="st">"Number of high fruit consumed"</span>)<span class="sc">+</span></span>
-<span id="cb37-6"><a href="#cb37-6"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mean number of high value fruit consumed per trial"</span>,<span class="at">subtitle =</span> <span class="st">"max possible is 10"</span>)<span class="sc">+</span></span>
-<span id="cb37-7"><a href="#cb37-7"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount))<span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="672" class="r-stretch"></section></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="672" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>Distinguish between fixed and random fruit: performance improves more over trials for fixed fruit</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">colour=</span>fruits))<span class="sc">+</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="672" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>Distinguish between naive and informed participants: performance is better for fixed fruit when participants are informed that the trees will be in the same place across trials (this primes them to remember where the trees are)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">colour=</span>fruits))<span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>instructions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-35-1.png" width="672" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>Cosmetic adjustments</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">color=</span>fruits))<span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>  <span class="fu">ylab</span>(<span class="st">"Number of high fruit consumed"</span>)<span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mean number of high value fruit consumed per trial"</span>, </span>
+<span id="cb40-7"><a href="#cb40-7"></a>       <span class="at">subtitle =</span> <span class="st">"max possible is 10"</span>)<span class="sc">+</span></span>
+<span id="cb40-8"><a href="#cb40-8"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb40-9"><a href="#cb40-9"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>())<span class="sc">+</span><span class="co">#, aspect.ratio = 1)+</span></span>
+<span id="cb40-10"><a href="#cb40-10"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" style="width:12in;height:4in"></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Switch from LOESS regression to linear regression using <code>method='lm'</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">color=</span>fruits))<span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">'lm'</span>)<span class="sc">+</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a>  <span class="fu">ylab</span>(<span class="st">"Number of high fruit consumed"</span>)<span class="sc">+</span></span>
+<span id="cb41-6"><a href="#cb41-6"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mean number of high value fruit consumed per trial"</span>, </span>
+<span id="cb41-7"><a href="#cb41-7"></a>       <span class="at">subtitle =</span> <span class="st">"max possible is 10"</span>)<span class="sc">+</span></span>
+<span id="cb41-8"><a href="#cb41-8"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb41-9"><a href="#cb41-9"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>())<span class="sc">+</span><span class="co">#, aspect.ratio = 1)+</span></span>
+<span id="cb41-10"><a href="#cb41-10"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-37-1.png" style="width:12in;height:4in"></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>An alternative using points and lines</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">colour=</span>fruits))<span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">'point'</span>,<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.2</span>))<span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">'line'</span>,<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.2</span>))<span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" width="672" class="r-stretch"></section></section>
 <section>
 <section id="i-want-to-export-my-plot" class="title-slide slide level1 center" data-number="8">
 <h1><span class="header-section-number">8</span> I want to export my plot</h1>
@@ -955,18 +1020,18 @@ language      word nonword
 <li>First run the code that generates the plot</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># the next 3 lines are all assignments so they don't produce output</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>myaxes <span class="ot">=</span> <span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt,  <span class="at">x=</span>condition, <span class="at">fill=</span>language))</span>
-<span id="cb38-3"><a href="#cb38-3"></a>myplot <span class="ot">=</span> myaxes <span class="sc">+</span> <span class="fu">geom_violin</span>()</span>
-<span id="cb38-4"><a href="#cb38-4"></a>myplot <span class="ot">=</span> myplot <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)</span>
-<span id="cb38-5"><a href="#cb38-5"></a><span class="co"># the next line produces the whole plot as output</span></span>
-<span id="cb38-6"><a href="#cb38-6"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="co"># the next 3 lines are all assignments so they don't produce output</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>myaxes <span class="ot">=</span> <span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt,  <span class="at">x=</span>condition, <span class="at">fill=</span>language))</span>
+<span id="cb43-3"><a href="#cb43-3"></a>myplot <span class="ot">=</span> myaxes <span class="sc">+</span> <span class="fu">geom_violin</span>()</span>
+<span id="cb43-4"><a href="#cb43-4"></a>myplot <span class="ot">=</span> myplot <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)</span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="co"># the next line produces the whole plot as output</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>now we can say <code>ggsave</code> which saves the most recently generated plot to file.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"Figure1.png"</span>, <span class="at">width=</span><span class="dv">7</span>, <span class="at">height=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"Figure1.png"</span>, <span class="at">width=</span><span class="dv">7</span>, <span class="at">height=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="test-second-level-header" class="slide level2" data-number="8.1">
