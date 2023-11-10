@@ -783,53 +783,65 @@ language      word nonword
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt, <span class="at">x=</span>condition, <span class="at">colour=</span>condition))<span class="sc">+</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
 <span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="672"></p>
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="672" class="r-stretch"></section>
+</div>
+<p>Change title of the legend for colour</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt, <span class="at">x=</span>condition, <span class="at">colour=</span>condition))<span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">labs</span>(<span class="at">colour=</span><span class="st">"Word Type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="672"></p>
+</div>
+</div>
+</section>
 <section class="slide level2">
 
 <p>Maybe violins</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt, <span class="at">x=</span>condition, <span class="at">colour=</span>condition))<span class="sc">+</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill=</span>condition), <span class="at">alpha=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="672" class="r-stretch"></section>
-<section class="slide level2">
-
-<p>I like to see the mean overlaid on violins</p>
-<div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt, <span class="at">x=</span>condition, <span class="at">colour=</span>condition))<span class="sc">+</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill=</span>condition), <span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill=</span>condition), <span class="at">alpha=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-27-1.png" width="672" class="r-stretch"></section>
 <section class="slide level2">
 
-<p>Adding a line joining the means can help make interactions clearer</p>
+<p>I like to see the mean overlaid on violins</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt, <span class="at">x=</span>condition, <span class="at">colour=</span>condition))<span class="sc">+</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill=</span>condition), <span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">show.legend =</span> F)<span class="sc">+</span></span>
-<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">show.legend =</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
-<span id="cb32-5"><a href="#cb32-5"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">'line'</span>, <span class="at">fun=</span>mean, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>), <span class="at">colour=</span><span class="st">'black'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill=</span>condition), <span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="576" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="672" class="r-stretch"></section>
+<section class="slide level2">
+
+<p>Adding a line joining the means can help make interactions clearer</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt, <span class="at">x=</span>condition, <span class="at">colour=</span>condition))<span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill=</span>condition), <span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">show.legend =</span> F)<span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">show.legend =</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">'line'</span>, <span class="at">fun=</span>mean, <span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>), <span class="at">colour=</span><span class="st">'black'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="576" class="r-stretch"></section>
 <section class="slide level2">
 
 <p>I want to see how the distributions overlap</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(data_ldt, </span>
-<span id="cb33-2"><a href="#cb33-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span>rt, <span class="at">group=</span><span class="fu">interaction</span>(condition, language), <span class="at">fill=</span>condition))<span class="sc">+</span></span>
-<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">ggplot</span>(data_ldt, </span>
+<span id="cb34-2"><a href="#cb34-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span>rt, <span class="at">group=</span><span class="fu">interaction</span>(condition, language), <span class="at">fill=</span>condition))<span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="672" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="672" class="r-stretch"></section>
 <section class="slide level2">
 
 <p>I want to see how the distributions overlap in the same facet</p>
@@ -838,20 +850,20 @@ language      word nonword
 <li><p>output in next slide</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">ggplot</span>(data_ldt, </span>
-<span id="cb34-2"><a href="#cb34-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span>rt, </span>
-<span id="cb34-3"><a href="#cb34-3"></a>           <span class="at">fill=</span><span class="fu">interaction</span>(condition, language)))<span class="sc">+</span></span>
-<span id="cb34-4"><a href="#cb34-4"></a>  <span class="co">#facet_wrap(~language)+</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb34-6"><a href="#cb34-6"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name=</span><span class="st">'condition'</span>)<span class="sc">+</span></span>
-<span id="cb34-7"><a href="#cb34-7"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">ggplot</span>(data_ldt, </span>
+<span id="cb35-2"><a href="#cb35-2"></a>       <span class="fu">aes</span>(<span class="at">x=</span>rt, </span>
+<span id="cb35-3"><a href="#cb35-3"></a>           <span class="at">fill=</span><span class="fu">interaction</span>(condition, language)))<span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="co">#facet_wrap(~language)+</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name=</span><span class="st">'condition'</span>)<span class="sc">+</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>I want to see how the distributions overlap in the same facet</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="576" class="r-stretch"></section></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="576" class="r-stretch"></section></section>
 <section>
 <section id="when-measures-change-over-time" class="title-slide slide level1 center" data-number="7">
 <h1><span class="header-section-number">7</span> When measures change over time</h1>
@@ -860,7 +872,7 @@ language      word nonword
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">summary</span>(data_foraging)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">summary</span>(data_foraging)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       pid           date                       
  5d15b34e0b1f87000115ec96: 10   Min.   :2023-07-10 09:56:15.00  
@@ -933,56 +945,37 @@ language      word nonword
 
 <p>Quick and dirty first: slight improvement over trials before we distinguish between the conditions</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount))<span class="sc">+</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="672" class="r-stretch"></section>
-<section class="slide level2">
-
-<p>Distinguish between fixed and random fruit: performance improves more over trials for fixed fruit</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">colour=</span>fruits))<span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount))<span class="sc">+</span></span>
 <span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="672" class="r-stretch"></section>
 <section class="slide level2">
 
-<p>Distinguish between naive and informed participants: performance is better for fixed fruit when participants are informed that the trees will be in the same place across trials (this primes them to remember where the trees are)</p>
+<p>Distinguish between fixed and random fruit: performance improves more over trials for fixed fruit</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">colour=</span>fruits))<span class="sc">+</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>instructions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-35-1.png" width="672" class="r-stretch"></section>
 <section class="slide level2">
 
-<p>Cosmetic adjustments</p>
+<p>Distinguish between naive and informed participants: performance is better for fixed fruit when participants are informed that the trees will be in the same place across trials (this primes them to remember where the trees are)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">color=</span>fruits))<span class="sc">+</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
-<span id="cb40-4"><a href="#cb40-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
-<span id="cb40-5"><a href="#cb40-5"></a>  <span class="fu">ylab</span>(<span class="st">"Number of high fruit consumed"</span>)<span class="sc">+</span></span>
-<span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mean number of high value fruit consumed per trial"</span>, </span>
-<span id="cb40-7"><a href="#cb40-7"></a>       <span class="at">subtitle =</span> <span class="st">"max possible is 10"</span>)<span class="sc">+</span></span>
-<span id="cb40-8"><a href="#cb40-8"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb40-9"><a href="#cb40-9"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>())<span class="sc">+</span><span class="co">#, aspect.ratio = 1)+</span></span>
-<span id="cb40-10"><a href="#cb40-10"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" style="width:12in;height:4in"></p>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">colour=</span>fruits))<span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>instructions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div>
-</section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" width="672" class="r-stretch"></section>
 <section class="slide level2">
 
-<p>Switch from LOESS regression to linear regression using <code>method='lm'</code></p>
+<p>Cosmetic adjustments</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">color=</span>fruits))<span class="sc">+</span></span>
 <span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
-<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">'lm'</span>)<span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">geom_smooth</span>()<span class="sc">+</span></span>
 <span id="cb41-4"><a href="#cb41-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
 <span id="cb41-5"><a href="#cb41-5"></a>  <span class="fu">ylab</span>(<span class="st">"Number of high fruit consumed"</span>)<span class="sc">+</span></span>
 <span id="cb41-6"><a href="#cb41-6"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mean number of high value fruit consumed per trial"</span>, </span>
@@ -997,16 +990,35 @@ language      word nonword
 </section>
 <section class="slide level2">
 
+<p>Switch from LOESS regression to linear regression using <code>method='lm'</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">color=</span>fruits))<span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">'lm'</span>)<span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a>  <span class="fu">ylab</span>(<span class="st">"Number of high fruit consumed"</span>)<span class="sc">+</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mean number of high value fruit consumed per trial"</span>, </span>
+<span id="cb42-7"><a href="#cb42-7"></a>       <span class="at">subtitle =</span> <span class="st">"max possible is 10"</span>)<span class="sc">+</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb42-9"><a href="#cb42-9"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(), <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>())<span class="sc">+</span><span class="co">#, aspect.ratio = 1)+</span></span>
+<span id="cb42-10"><a href="#cb42-10"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" style="width:12in;height:4in"></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
 <p>An alternative using points and lines</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">colour=</span>fruits))<span class="sc">+</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">'point'</span>,<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.2</span>))<span class="sc">+</span></span>
-<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">'line'</span>,<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.2</span>))<span class="sc">+</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
-<span id="cb42-5"><a href="#cb42-5"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">ggplot</span>(data_foraging, <span class="fu">aes</span>(<span class="at">y=</span>n_hi_consumed, <span class="at">x=</span>trialCount, <span class="at">colour=</span>fruits))<span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">'point'</span>,<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.2</span>))<span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">stat_summary</span>(<span class="at">geom=</span><span class="st">'line'</span>,<span class="at">position=</span><span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.2</span>))<span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>instructions)<span class="sc">+</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" width="672" class="r-stretch"></section></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-39-1.png" width="672" class="r-stretch"></section></section>
 <section>
 <section id="i-want-to-export-my-plot" class="title-slide slide level1 center" data-number="8">
 <h1><span class="header-section-number">8</span> I want to export my plot</h1>
@@ -1020,18 +1032,18 @@ language      word nonword
 <li>First run the code that generates the plot</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="co"># the next 3 lines are all assignments so they don't produce output</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>myaxes <span class="ot">=</span> <span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt,  <span class="at">x=</span>condition, <span class="at">fill=</span>language))</span>
-<span id="cb43-3"><a href="#cb43-3"></a>myplot <span class="ot">=</span> myaxes <span class="sc">+</span> <span class="fu">geom_violin</span>()</span>
-<span id="cb43-4"><a href="#cb43-4"></a>myplot <span class="ot">=</span> myplot <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)</span>
-<span id="cb43-5"><a href="#cb43-5"></a><span class="co"># the next line produces the whole plot as output</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># the next 3 lines are all assignments so they don't produce output</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>myaxes <span class="ot">=</span> <span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt,  <span class="at">x=</span>condition, <span class="at">fill=</span>language))</span>
+<span id="cb44-3"><a href="#cb44-3"></a>myplot <span class="ot">=</span> myaxes <span class="sc">+</span> <span class="fu">geom_violin</span>()</span>
+<span id="cb44-4"><a href="#cb44-4"></a>myplot <span class="ot">=</span> myplot <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)</span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="co"># the next line produces the whole plot as output</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>now we can say <code>ggsave</code> which saves the most recently generated plot to file.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"Figure1.png"</span>, <span class="at">width=</span><span class="dv">7</span>, <span class="at">height=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"Figure1.png"</span>, <span class="at">width=</span><span class="dv">7</span>, <span class="at">height=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="test-second-level-header" class="slide level2" data-number="8.1">

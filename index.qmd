@@ -330,6 +330,16 @@ ggplot(data_ldt, aes(y=rt, x=condition, colour=condition))+
   geom_boxplot()
 ```
 
+Change title of the legend for colour
+
+```{r}
+ggplot(data_ldt, aes(y=rt, x=condition, colour=condition))+
+  facet_wrap(~language)+
+  geom_boxplot()+
+  labs(colour="Word Type")
+```
+
+
 ---
 
 Maybe violins
