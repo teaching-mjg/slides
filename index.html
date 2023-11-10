@@ -783,21 +783,20 @@ language      word nonword
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt, <span class="at">x=</span>condition, <span class="at">colour=</span>condition))<span class="sc">+</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
 <span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="672"></p>
+
 </div>
-</div>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="672" class="r-stretch"></section>
+<section class="slide level2">
+
 <p>Change title of the legend for colour</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(data_ldt, <span class="fu">aes</span>(<span class="at">y=</span>rt, <span class="at">x=</span>condition, <span class="at">colour=</span>condition))<span class="sc">+</span></span>
 <span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>language)<span class="sc">+</span></span>
 <span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
 <span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">labs</span>(<span class="at">colour=</span><span class="st">"Word Type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="672"></p>
+
 </div>
-</div>
-</section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="672" class="r-stretch"></section>
 <section class="slide level2">
 
 <p>Maybe violins</p>
